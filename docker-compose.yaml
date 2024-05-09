@@ -10,6 +10,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongodb_data:/data/db
 
   mongo-express:
     depends_on:
@@ -23,6 +25,7 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
+
   app:
     build: .
     restart: always
@@ -30,3 +33,7 @@ services:
       - 3001:3001
     depends_on:
       - mongo
+
+volumes:
+  mongodb_data:
+    driver: local
