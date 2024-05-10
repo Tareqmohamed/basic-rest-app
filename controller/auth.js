@@ -6,7 +6,7 @@ exports.verifyToken=function verifyToken(req, res, next) {
     if (!token) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
-    jwt.verify(token, 'secretkey', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_secret, (err, decoded) => {
         if (err) {
             return res.status(401).json({ message: 'Unauthorized' });
         }

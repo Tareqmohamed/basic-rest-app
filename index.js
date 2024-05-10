@@ -11,7 +11,7 @@ require('dotenv').config()
 const userRoutes = require('./routes/user')
 const PORT = process.env['PORT'] || 5000;
 
-const URI = process.env['momgo_url'];
+const URI = process.env['mongo_url'];
 // Initialize express app
 const app = express();
 
@@ -24,8 +24,8 @@ app.use(bodyParser.json());
 
 mongoose.connect(URI, {
     authSource: "admin",
-    user: "root",
-    pass: "example",
+    user: process.env.db_admin,
+    pass: process.env.db_password,
     useNewUrlParser: true,
     useUnifiedTopology: true })
     .then(() => console.log('MongoDB Connected'))
